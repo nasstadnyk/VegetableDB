@@ -38,6 +38,11 @@ namespace VegetableDB.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
+
+                        VegetableDB.Logic.ShoppingCartActions usersShoppingCart = new VegetableDB.Logic.ShoppingCartActions();
+                        String cartId = usersShoppingCart.GetCartId();
+                        usersShoppingCart.MigrateCart(cartId, Email.Text);
+
                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:
